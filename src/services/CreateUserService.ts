@@ -1,14 +1,15 @@
+import { getCustomRepository } from "typeorm";
 import { UsersRepositories } from "../repositories/UsersRepositories";
 
 interface IUserRequest {
-    name: string
-    email: string
-    admin?: boolean
+    name: string;
+    email: string;
+    admin?: boolean;
 }
 
 class CreateUserService {
     async execute({ name, email, admin }: IUserRequest) {
-        const usersRepository = new UsersRepositories();
+        const usersRepository = getCustomRepository(UsersRepositories);
 
         //verificar se o e-mail está preenchido
         if (!email) {
